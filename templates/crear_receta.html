@@ -1,0 +1,177 @@
+<!-- crear receta-->
+
+{%extends "base/base.html"%}
+
+{%block name%} 
+    Crear Receta
+{%endblock%}
+
+{% block content %}
+  
+    <h1 class="text-center texti">¡Crea tu propia receta!</h1>
+    <form action="/crear" method="POST" enctype=multipart/form-data>
+        <div class="card-body image-carousel image4">
+          <div class="card">
+            <div class="card-body">
+              <div class="container">
+                <div class="mb-2">
+                  <label for="exampleFormControlInput1" class="form-label fs-4 texti">Nombra tu receta</label>             
+                </div>
+                <div class="input-group mb-3">
+                  <input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off">
+                  <label class="btn btn-outline-primary texti" for="btncheck1">Vegetariana</label>
+                  <input name="titulo" type="text" class="form-control texti" placeholder="Pasta alfredo clásica" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                </div> 
+                <div class="mb-3">
+                  <label for="formFile" class="form-label">Elige imagen de la receta</label>
+                  <br>
+                  <input name="imagen" required class="form-control" type="file" id="formFile">
+                </div>
+                <div class="row">
+                  <div class="col-md">
+                    <div class="card">
+                      <div class="card-header text-center fw-bold" style="background-color: #e3170a; color: whitesmoke;">
+                        Ingredientes
+                      </div>
+                      <div class="card-body">
+                        <div class="row g-3 align-items-center">
+                          <div id="ingredients" style="margin:10px;"></div>
+
+                          <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text texti">
+                              Especifíca cantidades
+                            </span>
+                          </div>
+                          <div class="input-group mb-3" >
+                            <span class="input-group-text texti" id="inputGroup-sizing-default">Ingrediente</span>
+                            <input id='ingredient-input' type="text" class="form-control texti" placeholder="500gr de pasta Spaghetti" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <div id="validationServer03Feedback" class="invalid-feedback texti">
+                              Ingresa la cantidad primero seguido del nombre del ingrediente
+                            </div>
+                          </div>
+                          <div class="d-grid gap-2">
+                            <button onclick='agregar_ingredientes()' class="btn btn-warning texti" type="button" style="color: whitesmoke;">Agregar ingrediente</button>
+                          </div>
+                        </div>
+                        <div class="input-group mb-3" style="margin-top: 1rem">
+                          <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                            <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                          </svg></span>
+                          <input name="costo" placeholder="Costo aproximado de la receta" type="number" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                        </div>
+                        <div class="input-group mb-3" style="margin-top: 1rem">
+                          <span class="input-group-text"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock-history" viewBox="0 0 16 16">
+                            <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022l-.074.997zm2.004.45a7.003 7.003 0 0 0-.985-.299l.219-.976c.383.086.76.2 1.126.342l-.36.933zm1.37.71a7.01 7.01 0 0 0-.439-.27l.493-.87a8.025 8.025 0 0 1 .979.654l-.615.789a6.996 6.996 0 0 0-.418-.302zm1.834 1.79a6.99 6.99 0 0 0-.653-.796l.724-.69c.27.285.52.59.747.91l-.818.576zm.744 1.352a7.08 7.08 0 0 0-.214-.468l.893-.45a7.976 7.976 0 0 1 .45 1.088l-.95.313a7.023 7.023 0 0 0-.179-.483zm.53 2.507a6.991 6.991 0 0 0-.1-1.025l.985-.17c.067.386.106.778.116 1.17l-1 .025zm-.131 1.538c.033-.17.06-.339.081-.51l.993.123a7.957 7.957 0 0 1-.23 1.155l-.964-.267c.046-.165.086-.332.12-.501zm-.952 2.379c.184-.29.346-.594.486-.908l.914.405c-.16.36-.345.706-.555 1.038l-.845-.535zm-.964 1.205c.122-.122.239-.248.35-.378l.758.653a8.073 8.073 0 0 1-.401.432l-.707-.707z"/>
+                            <path d="M8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0v1z"/>
+                            <path d="M7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5z"/>
+                          </svg></span>
+                          <input required name="tiempo" placeholder="Tiempo (1hr, 30min, etc.)" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                        </div>         
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="card">
+                      <div class="card-header text-center fw-bold" style="background-color: #e3170a; color: whitesmoke;">
+                        Instrucciones
+                      </div>
+                      <div class="card-body texti">
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="dificultad" id="inlineRadio1" value="Fácil">
+                          <label class="form-check-label" for="inlineRadio1">Fácil</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="dificultad" id="inlineRadio1" value="Normal">
+                          <label class="form-check-label" for="inlineRadio1">Normal</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="dificultad" id="inlineRadio1" value="Difícil">
+                          <label class="form-check-label" for="inlineRadio1">Difícil</label>
+                        </div>
+                      </div>
+                      <div class="card-body" >
+                        <div class="mb-3">
+                            <div id="pasos_ingresados"></div>
+                          <div class="input-group mb-3">
+                            <span class="input-group-text texti" id="inputGroup-sizing-default">Paso 1</span>
+                            <input id="titulo_paso" type="text" class="form-control" placeholder="Prepara la pasta" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                          </div>
+                          <label for="exampleFormControlTextarea1" class="form-label texti">Detalles</label>
+                          <textarea id="contenido_paso" class="form-control texti" placeholder="Llena una olla grande con 1 litro de agua, agrega un puñado de sal y espera que hierva[..]" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                        <div class="d-grid gap-2">
+                          <button onclick="cargar_paso()" class="btn btn-warning texti" type="button" style="color: whitesmoke;">Agregar paso</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-grid gap-2" style="margin-top: 2rem;">
+                  <button class="btn btn-secondary" type="button" style="color: seashell; ">Guardar receta en borradores</button>
+                  <button  class="btn btn-primary" type="submit" style="font-size:x-large">¡Publicar ya!</button>
+                </div>
+              </div>
+          </div>
+        </div>
+        </div>
+    </form>
+<!-- <script src="{{url_for('static', filename='js/ingredients.js')}}"></script> -->
+
+<script>
+  let i=0; // Inicializamos variable contador
+
+  // Obtener por sus id los valores de entrada y de salida
+  let input_ingrediente = document.getElementById('ingredient-input'); //input
+  let lista_ingredientes = document.getElementById('ingredients'); //output
+
+  function agregar_ingredientes(){ // Agregar al botón correspondiente onclick
+    if (input_ingrediente.value=='' || !input_ingrediente.value.includes('gr') )
+      return;
+    i +=1;
+
+    // Escribir en la etiqueta de salida (output)
+    lista_ingredientes.innerHTML +=  `
+                          <li> ${input_ingrediente.value} </li>
+                          <input type="hidden" name="ingrediente-${i}" value="${input_ingrediente.value}">
+                          `;
+    // Reiniciar valores de input por vacíos
+    input_ingrediente.value = '';
+  }
+
+
+  let input_titulo_paso = document.getElementById('titulo_paso');
+  let input_contenido_paso = document.getElementById('contenido_paso');
+  let pasos_div = document.getElementById('pasos_ingresados');
+  let j = 0;
+
+  function cargar_paso(){
+    if(input_titulo_paso.value!='' && input_contenido_paso.value!= ''){
+      console.log(`Hola mundo  ${input_titulo_paso.value}`);
+      pasos_div.innerHTML += `<li> ${input_titulo_paso.value} </li>
+                                <input name="paso_titulo_${j}" type="hidden" value="${input_titulo_paso.value}">
+                                <input name="paso_contenido_${j}" type="hidden" value="${input_contenido_paso.value}">
+                               `;
+
+      input_titulo_paso.classList.remove('is-invalid');
+      input_contenido_paso.classList.remove('is-invalid');
+
+      input_titulo_paso.value = '';
+      input_contenido_paso.value = '';
+    }
+    else{//si no tiene nada escrito en titulo ni contenido
+      if(input_titulo_paso.value==''){
+        input_titulo_paso.classList.add('is-invalid');
+      }
+      if(input_contenido_paso.value==''){
+        input_contenido_paso.classList.add('is-invalid');
+      }
+    }
+      
+    j+=1;
+  }
+
+
+
+</script>
+
+{% endblock %}
