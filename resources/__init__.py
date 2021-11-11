@@ -48,6 +48,9 @@ def ver_receta(id):
 
 
 def crear_receta():
+    """
+    Esta función se encarga de crear una receta nueva.
+    """
     if request.method == 'GET':
         return render_template('crear_receta.html')
 
