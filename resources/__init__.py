@@ -43,7 +43,7 @@ def index():
 
 def ver_receta(id):
     # TODO: Validar id
-    id = min([len(recetas) - 1, int(id)])
+        id = min([len(recetas) - 1, int(id)])
     return render_template('big_card.html', receta=recetas[id])
 
 
