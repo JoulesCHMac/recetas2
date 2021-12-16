@@ -1,6 +1,11 @@
 
-from .ingredientes import Ingrediente
-from .pasos import Paso
-from .recetas import Receta
+# from . import ingredientes
+# from . import pasos
+# from . import recetas
 
 
+# __all__ = [
+#     'ingredientes',
+#     'pasos',
+#     'recetas'
+# ]
